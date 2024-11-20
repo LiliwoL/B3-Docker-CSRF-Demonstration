@@ -4,26 +4,42 @@
         die('Non authentifié');
     }
 
-    // Fonction de transfert DANGEREUSE (sans protection CSRF)
-    function transferMoney($amount, $recipient) {
-        // Simulation de transfert
-        file_put_contents('transferts.log',
-            date('Y-m-d H:i:s') .
-            " Transfert de {$_SESSION['username']} : $amount vers $recipient\n",
-            FILE_APPEND
-        );
+    // Fonction de validation du token CSRF
+    function validateCSRFToken($token) {
+        return isset($_SESSION['csrf_token']) &&
+            hash_equals($_SESSION['csrf_token'], $token);
     }
 
-    // Réception de la demande de transfert
-    if (isset($_GET['amount']) && isset($_GET['recipient']))
+    // Fonction sécurisée de transfert
+    function transferMoney($amount, $recipient) {
+        // Simulation de transfert avec journalisation sécurisée
+        $logEntry = date('Y-m-d H:i:s') .
+            " Transfert de {$_SESSION['username']} : $amount vers $recipient\n";
+
+        // Utilisation de FILE_APPEND avec des permissions restreintes
+        file_put_contents('transferts.log', $logEntry, FILE_APPEND | LOCK_EX);
+    }
+
+    // Traitement du transfert
+    if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-        // Les informations du formulaire sont récupérées
-        // Aucune vérification n'est effectuée
+        // Vérification du token CSRF
+        if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token']))
+        {
+            die('Erreur de sécurité : Token CSRF invalide');
+        }
 
-        $amount = floatval($_GET['amount']);
-        $recipient = htmlspecialchars($_GET['recipient']);
+        // Validation et assainissement des données
+        $amount = filter_input(INPUT_POST, 'amount', FILTER_VALIDATE_FLOAT);
+        $recipient = filter_input(INPUT_POST, 'recipient', FILTER_SANITIZE_STRING);
+
+        if ($amount === false || $recipient === false)
+        {
+            die('Données de transfert invalides');
+        }
+
+        // Transfert sécurisé
         transferMoney($amount, $recipient);
-
-        echo "Transfert effectué : $amount vers $recipient";
+        echo "Transfert sécurisé effectué";
     }
 ?>

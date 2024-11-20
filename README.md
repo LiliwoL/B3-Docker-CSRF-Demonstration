@@ -30,4 +30,4 @@ Ce site est contrôlé par un attaquant et a été envoyé à l'utilisateur impr
 
 - Comprendre le mécanisme CSRF
 - Identifier les vulnérabilités de sécurité
-- Mettre en place des protections
+- Mettre en place des protections (cf. branche **protection**)

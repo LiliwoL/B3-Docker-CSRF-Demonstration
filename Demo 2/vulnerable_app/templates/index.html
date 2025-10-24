@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Site Vulnérable - CSRF Demo</title>
+</head>
+<body>
+<h1>Bienvenue sur le site vulnérable</h1>
+<p>Connecté en tant que : {{ username }}</p>
+<p>Votre mot de passe actuel est : <strong>{{ password }}</strong></p>
+<form action="/change_password" method="POST">
+    <label for="new_password">Nouveau mot de passe :</label>
+    <input type="password" id="new_password" name="new_password" required>
+
+    <!-- Ajout du token CSRF -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <button type="submit">Changer le mot de passe</button>
+</form>
+</body>
+</html>

@@ -83,18 +83,27 @@ La ligne `file_put_contents('transfers.log', $logEntry, FILE_APPEND | LOCK_EX);`
 
 Pour corriger la faille, ajoutez un token CSRF à l’application vulnérable :
 
-Utilisez le module flask_wtf.csrf ou générez un token manuellement.
-Vérifiez ce token à chaque requête sensible.
+Utilisez le module **flask_wtf.csrf** ou générez un token **manuellement**.
+**Vérifiez** ce token **à chaque requête** sensible.
 
 Exemple de correction avec Flask-WTF :
-python Copierfrom flask_wtf.csrf import CSRFProtect
+
+```python
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "votre_cle_secrete"
 csrf = CSRFProtect(app)
-Et ajoutez le token dans le formulaire :
-html Copier<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+```
 
+Et ajoutez le token dans les formulaires :
+```html
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+```
+
+![](readme_docs/3ee72090.png)
+
+![](readme_docs/640f0261.png)
 
 ## Questions pour les étudiants
 

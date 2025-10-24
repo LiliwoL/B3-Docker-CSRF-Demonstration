@@ -5,7 +5,8 @@
 </head>
 <body>
 <h1>Bienvenue sur le site vulnérable</h1>
-<p>Connecté en tant que : {{ request.cookies.get("username", "invité") }}</p>
+<p>Connecté en tant que : {{ username }}</p>
+<p>Votre mot de passe actuel est : <strong>{{ password }}</strong></p>
 <form action="/change_password" method="POST">
     <label for="new_password">Nouveau mot de passe :</label>
     <input type="password" id="new_password" name="new_password" required>

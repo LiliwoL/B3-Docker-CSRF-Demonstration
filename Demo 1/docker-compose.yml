@@ -1,7 +1,9 @@
 version: '3.8'
 
 services:
+  #############################################
   # Service for the vulnerable web application
+  #############################################
   web-vulnerable:
     image: php:8.1-apache
     ports:
@@ -14,7 +16,10 @@ services:
       - csrf-lab
     hostname: web-vulnerable
 
+
+  #############################################
   # Service for the attacker's site
+  #############################################
   attacker-site:
     image: nginx:alpine
     ports:
@@ -24,7 +29,10 @@ services:
     networks:
       - csrf-lab
 
+
+  #############################################
   # Service for the database
+  #############################################
   database:
     image: mysql:5.7
     environment:

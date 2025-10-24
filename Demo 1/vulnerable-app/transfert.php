@@ -7,6 +7,7 @@
     // Fonction de transfert DANGEREUSE (sans protection CSRF)
     function transferMoney($amount, $recipient) {
         // Simulation de transfert
+        // On écrit dans un fichier log
         file_put_contents('transferts.log',
             date('Y-m-d H:i:s') .
             " Transfert de {$_SESSION['username']} : $amount vers $recipient\n",
@@ -18,7 +19,7 @@
     if (isset($_GET['amount']) && isset($_GET['recipient']))
     {
         // Les informations du formulaire sont récupérées
-        // Aucune vérification n'est effectuée
+        // 💀💀💀 Aucune vérification n'est effectuée
 
         $amount = floatval($_GET['amount']);
         $recipient = htmlspecialchars($_GET['recipient']);

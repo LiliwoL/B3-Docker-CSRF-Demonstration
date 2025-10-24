@@ -2,6 +2,11 @@
 
 ![](readme_docs/859089c8.png)
 
+
+---
+
+# Démonstration 1
+
 ## Accès aux Services
 
 - Site Web Vulnérable CSRF : http://localhost:8080
@@ -21,7 +26,7 @@
 
 ## Journalisation Sécurisée
 
-La ligne f`ile_put_contents('transfers.log', $logEntry, FILE_APPEND | LOCK_EX);` combine deux drapeaux importants :
+La ligne `file_put_contents('transfers.log', $logEntry, FILE_APPEND | LOCK_EX);` combine deux drapeaux importants :
 
 **FILE_APPEND** (Ajout de contenu)
 

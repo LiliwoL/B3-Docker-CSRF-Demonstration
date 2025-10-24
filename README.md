@@ -101,7 +101,7 @@ Vous avez accès à un formulaire de transfert d'argent
 
 ## Solution pour se protéger
   
-Branche correction
+Branche protection
 
 ## Questions pour les étudiants
 
